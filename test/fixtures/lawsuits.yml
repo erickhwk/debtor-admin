@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  alias: MyString
+  category: 1
+  created_by: one
+  tenancies: one
+
+two:
+  alias: MyString
+  category: 1
+  created_by: two
+  tenancies: two

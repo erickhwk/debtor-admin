@@ -18,6 +18,7 @@ class LawsuitsController < ApplicationController
 
   # GET /lawsuits/1/edit
   def edit
+    @tenancies = Tenancy.all
   end
 
   # POST /lawsuits or /lawsuits.json

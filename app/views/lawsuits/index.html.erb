@@ -1,21 +1,63 @@
-<div class="w-full">
-  <% if notice.present? %>
-    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
-  <% end %>
+<h1 class="font-bold text-4xl">Processos</h1>
 
-  <% content_for :title, "Lawsuits" %>
-
-  <div class="flex justify-between items-center">
-    <h1 class="font-bold text-4xl">Lawsuits</h1>
-    <%= link_to "New lawsuit", new_lawsuit_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
-  </div>
-
-  <div id="lawsuits" class="min-w-full">
-    <% @lawsuits.each do |lawsuit| %>
-      <%= render lawsuit %>
-      <p>
-        <%= link_to "Show this lawsuit", lawsuit, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-      </p>
-    <% end %>
-  </div>
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-6">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    Alias
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Categoria
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Associados
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Criado por
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Criado em
+                </th>
+              <% if current_user.role == 'developer' %>
+                <th scope="col" class="px-6 py-3">
+                    Cliente
+                </th>
+              <% end %>
+                <th scope="col" class="px-6 py-3">
+                    Ações
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+          <% @lawsuits.each do |lawsuit| %>
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                  <%= lawsuit.alias %>
+                </th>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <%= lawsuit.category.humanize %>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <%= lawsuit.companies.present? ? lawsuit.companies.pluck(:name).join(', ') : 'Sem associações' %>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <%= lawsuit.created_by.email %>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <%= lawsuit.created_at.strftime('%d/%m/%Y - %H:%M:%S') %>
+                </td>
+              <% if current_user.role == 'developer' %>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <%= lawsuit.tenancy.name %>
+                </td>
+              <% end %>
+                <td class="flex items-center px-6 py-4">
+                  <%= link_to 'Edit', edit_lawsuit_path(lawsuit), class:"font-medium text-blue-600 dark:text-blue-500 hover:underline" %>
+                  <%= button_to 'Remove', lawsuit_path(lawsuit), method: 'delete', class:"font-medium text-red-600 dark:text-red-500 hover:underline ms-3" %>
+                </td>
+            </tr>
+          <% end %>
+        </tbody>
+    </table>
 </div>

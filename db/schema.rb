@@ -55,8 +55,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_10_170425) do
   create_table "companies", force: :cascade do |t|
     t.string "name"
     t.string "cnpj"
+    t.bigint "created_by_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["created_by_id"], name: "index_companies_on_created_by_id"
   end
 
   create_table "companies_lawsuits", id: false, force: :cascade do |t|
@@ -113,6 +115,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_10_170425) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "companies", "users", column: "created_by_id"
   add_foreign_key "lawsuits", "tenancies"
   add_foreign_key "lawsuits", "users", column: "created_by_id"
   add_foreign_key "reports", "lawsuits"

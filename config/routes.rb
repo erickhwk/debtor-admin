@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  resources :reports do
+    member do
+      delete :remove_file
+    end
+  end
   resources :lawsuits
   resources :tenancies
   devise_for :users

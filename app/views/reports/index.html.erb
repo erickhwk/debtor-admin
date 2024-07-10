@@ -1,0 +1,10 @@
+<div class="w-full">
+  <div id="reports" class="min-w-full">
+    <% @reports.each do |report| %>
+      <%= render report %>
+      <p>
+        <%= link_to "Show this report", report, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+      </p>
+    <% end %>
+  </div>
+</div>

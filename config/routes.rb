@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :companies
   resources :reports do
     member do
       delete :remove_file

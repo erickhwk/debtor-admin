@@ -6,7 +6,8 @@ class ReportsController < ApplicationController
 
   # GET /reports or /reports.json
   def index
-    @reports = Report.all
+    return @reports = Report.all.reverse  if current_user.role == 'developer'
+    @reports = Report.joins(:lawsuit).where(lawsuits: { tenancy_id: current_user.tenancy_id }).reverse
   end
 
   # GET /reports/1 or /reports/1.json

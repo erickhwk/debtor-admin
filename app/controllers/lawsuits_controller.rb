@@ -29,7 +29,7 @@ class LawsuitsController < ApplicationController
 
     respond_to do |format|
       if @lawsuit.save
-        format.html { redirect_to lawsuit_url(@lawsuit), notice: "Lawsuit was successfully created." }
+        format.html { redirect_to lawsuits_url, notice: "Lawsuit was successfully created." }
         format.json { render :show, status: :created, location: @lawsuit }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -42,7 +42,7 @@ class LawsuitsController < ApplicationController
   def update
     respond_to do |format|
       if @lawsuit.update(lawsuit_params)
-        format.html { redirect_to lawsuit_url(@lawsuit), notice: "Lawsuit was successfully updated." }
+        format.html { redirect_to lawsuits_url, notice: "Lawsuit was successfully updated." }
         format.json { render :show, status: :ok, location: @lawsuit }
       else
         format.html { render :edit, status: :unprocessable_entity }

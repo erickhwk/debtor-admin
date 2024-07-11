@@ -5,7 +5,7 @@ class CompaniesController < ApplicationController
 
   # GET /companies or /companies.json
   def index
-    return @companies = Company.all.reverse if current_user.role == 'developer'
+    return @companies = Company.all.reverse if current_user.profile.role == 'developer'
     @companies = Company.joins(:lawsuits).where(lawsuits: {tenancy: current_user.tenancy}).reverse
   end
 
@@ -63,13 +63,13 @@ class CompaniesController < ApplicationController
 
   private
     def check_if_theres_lawsuits
-      unless current_user.role == 'developer'
+      unless current_user.profile.role == 'developer'
         redirect_to new_lawsuit_path, alert: 'Não existem processos para associar a um informe. Por favor, crie seu primeiro processo.' if Lawsuit.where(tenancy: current_user.tenancy).empty?
       end
     end
 
     def set_lawsuits
-      current_user.role == 'developer' ?
+      current_user.profile.role == 'developer' ?
         @lawsuits = Lawsuit.all :
         @lawsuits = Lawsuit.where(tenancy: current_user.tenancy)
     end

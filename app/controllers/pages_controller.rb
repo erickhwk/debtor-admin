@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   def index
-    unless current_user.role == 'developer'
+    unless current_user.profile.role == 'developer'
       @reports = Report.joins(:lawsuit).where(lawsuits: { tenancy_id: current_user.tenancy_id }).published.latest
       @lawsuits = Lawsuit.where(tenancy_id: current_user.tenancy_id).latest
       @companies = Company.joins(:lawsuits).where(lawsuits: { tenancy_id: current_user.tenancy_id }).latest

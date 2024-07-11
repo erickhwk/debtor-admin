@@ -14,7 +14,7 @@
                 <th scope="col" class="px-6 py-3">
                     Anexos
                 </th>
-              <% if current_user.role == 'developer' %>
+              <% if current_user.profile.role == 'developer' %>
                 <th scope="col" class="px-6 py-3">
                     Cliente
                 </th>
@@ -36,7 +36,7 @@
                 <td class="px-6 py-4">
                   <%= report.files.attached? ? "Sim" : "Não" %>
                 </td>
-              <% if current_user.role == 'developer' %>
+              <% if current_user.profile.role == 'developer' %>
                 <td class="px-6 py-4 whitespace-nowrap">
                   <%= report.lawsuit.tenancy.name %>
                 </td>

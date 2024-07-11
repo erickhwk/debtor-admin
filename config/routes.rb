@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :profiles
   root 'pages#index'
 
   resources :companies

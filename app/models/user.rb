@@ -4,12 +4,14 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  belongs_to :tenancy, optional: true
-  before_create :set_default_role
+  has_one :profile
+  has_many :tenancies, through: :profile
+  after_create :create_dev_profile
 
-  enum role: { developer: 0, admin: 1, member: 2 }
-
-  def set_default_role
-  User.count.zero? ? self.role = :developer : self.role ||= :member
+  def create_dev_profile
+    if User.count == 1
+      role ='developer'
+      Profile.create(user: self, role: role)
+    end
   end
 end

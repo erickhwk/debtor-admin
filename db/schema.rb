@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_10_170425) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_11_165340) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -79,6 +79,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_10_170425) do
     t.index ["tenancy_id"], name: "index_lawsuits_on_tenancy_id"
   end
 
+  create_table "profiles", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.integer "role"
+    t.bigint "tenancy_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tenancy_id"], name: "index_profiles_on_tenancy_id"
+    t.index ["user_id"], name: "index_profiles_on_user_id"
+  end
+
   create_table "reports", force: :cascade do |t|
     t.string "title"
     t.bigint "lawsuit_id", null: false
@@ -101,16 +113,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_10_170425) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.string "first_name"
-    t.string "last_name"
-    t.string "phone_number"
-    t.integer "role"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "tenancies_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-    t.index ["tenancies_id"], name: "index_users_on_tenancies_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
@@ -118,7 +124,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_10_170425) do
   add_foreign_key "companies", "users", column: "created_by_id"
   add_foreign_key "lawsuits", "tenancies"
   add_foreign_key "lawsuits", "users", column: "created_by_id"
+  add_foreign_key "profiles", "tenancies"
+  add_foreign_key "profiles", "users"
   add_foreign_key "reports", "lawsuits"
   add_foreign_key "reports", "users", column: "created_by_id"
-  add_foreign_key "users", "tenancies", column: "tenancies_id"
 end

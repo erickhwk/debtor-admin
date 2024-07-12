@@ -73,3 +73,5 @@ end
 gem "tailwindcss-rails", "~> 2.6"
 
 gem "devise", "~> 4.9"
+gem "rack-cors"
+gem "active_model_serializers", "~> 0.10.14"

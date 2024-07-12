@@ -6,7 +6,7 @@ class CompaniesController < ApplicationController
   # GET /companies or /companies.json
   def index
     return @companies = Company.all.reverse if current_user.profile.role == 'developer'
-    @companies = Company.joins(:lawsuits).where(lawsuits: {tenancy: current_user.tenancy}).reverse
+    @companies = Company.joins(:lawsuits).where(lawsuits: {tenancy: current_user.profile.tenancy}).reverse
   end
 
   # GET /companies/1 or /companies/1.json

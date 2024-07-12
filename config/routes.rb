@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  resources :profiles
   root 'pages#index'
-
+  
+  resources :profiles
   resources :companies
   resources :reports do
     member do

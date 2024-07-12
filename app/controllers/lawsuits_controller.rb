@@ -3,7 +3,8 @@ class LawsuitsController < ApplicationController
 
   # GET /lawsuits or /lawsuits.json
   def index
-    @lawsuits = Lawsuit.all
+    return @lawsuits = Lawsuit.all.reverse  if current_user.profile.role == 'developer'
+    @lawsuits = Lawsuit.where(tenancy: current_user.profile.tenancy).reverse
   end
 
   # GET /lawsuits/1 or /lawsuits/1.json

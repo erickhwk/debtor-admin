@@ -12,7 +12,7 @@
   <% end %>
 
   <div class="my-5">
-    <%= form.label :name %>
+    <%= form.label :name, "Nome" %>
     <%= form.text_field :name, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" %>
   </div>
 
@@ -22,8 +22,8 @@
   </div>
 
   <div class="my-5">
-    <%= form.label :lawsuit_ids, "Lawsuits" %>
-    <%= form.collection_select :lawsuit_ids, @lawsuits, :id, :alias, { include_blank: true, multiple: true }, class: "-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" %>
+    <%= form.label :lawsuit_ids, "Processos" %>
+    <%= form.collection_select :lawsuit_ids, @lawsuits, :id, :alias, { include_blank: true, multiple: true }, { class: "-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500", id:"selectElement" } %>
   </div>
 
 
@@ -31,3 +31,12 @@
     <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
   </div>
 <% end %>
+
+<script>
+  new SlimSelect({
+    select: '#selectElement',
+    settings: {
+      placeholderText: 'Selecione um Processo',
+    }
+  })
+</script>

@@ -8,9 +8,7 @@ class User < ApplicationRecord
   private
 
   def create_profile
-    Rails.logger.info "Creating profile for user #{self.id}"
     role = User.count == 1 ? 'developer' : 'member'
-    profile = Profile.create!(user: self, role: role)
-    Rails.logger.info "Profile created with ID #{profile.id} for user #{self.id}"
+    Profile.create!(user: self, role: role)
   end
 end

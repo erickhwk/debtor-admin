@@ -25,7 +25,7 @@ class TenanciesController < ApplicationController
 
     respond_to do |format|
       if @tenancy.save
-        format.html { redirect_to tenancy_url(@tenancy), notice: "Tenancy was successfully created." }
+        format.html { redirect_to tenancies_url, notice: "Tenancy was successfully created." }
         format.json { render :show, status: :created, location: @tenancy }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +38,7 @@ class TenanciesController < ApplicationController
   def update
     respond_to do |format|
       if @tenancy.update(tenancy_params)
-        format.html { redirect_to tenancy_url(@tenancy), notice: "Tenancy was successfully updated." }
+        format.html { redirect_to tenancies_url, notice: "Tenancy was successfully updated." }
         format.json { render :show, status: :ok, location: @tenancy }
       else
         format.html { render :edit, status: :unprocessable_entity }

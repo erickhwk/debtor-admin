@@ -13,30 +13,30 @@
 
   <div class="my-5">
     <%= form.label :first_name %>
-    <%= form.text_field :first_name, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" %>
+    <%= form.text_field :first_name, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" %>
   </div>
 
   <div class="my-5">
     <%= form.label :last_name %>
-    <%= form.text_field :last_name, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" %>
+    <%= form.text_field :last_name, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" %>
   </div>
 
   <div class="my-5">
     <%= form.label :role %>
-    <%= form.select :role, @roles.map {|k| [k.humanize, k]}, { include_blank: true }, { class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500", disabled: current_user.profile.role == 'member' } %>
+    <%= form.select :role, @roles.map {|k| [k.humanize, k]}, { include_blank: true }, { class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5", disabled: current_user.profile.role == 'member' } %>
   </div>
 
   <% if current_user.profile.role == 'developer' %>
     <div class="my-5">
       <%= form.label "Email" %>
-      <%= form.select :user_id, @users.map {|t| [t.email, t.id]}, { include_blank: true }, class: "-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" %>
+      <%= form.select :user_id, @users.map {|t| [t.email, t.id]}, { include_blank: true }, class: "-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5" %>
     </div>
   <% end %>
 
   <% if current_user.profile.role == 'developer' %>
     <div class="my-5">
       <%= form.label :tenancy_id %>
-      <%= form.select :tenancy_id, @tenancies.map {|t| [t.name, t.id]}, { include_blank: true }, class: "-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" %>
+      <%= form.select :tenancy_id, @tenancies.map {|t| [t.name, t.id]}, { include_blank: true }, class: "-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5" %>
     </div>
   <% else %>
     <%= form.hidden_field :tenancy_id, value: current_user.profile.tenancy_id %>

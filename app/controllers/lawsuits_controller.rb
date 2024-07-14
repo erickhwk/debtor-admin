@@ -25,7 +25,7 @@ class LawsuitsController < ApplicationController
   # POST /lawsuits or /lawsuits.json
   def create
     @lawsuit = Lawsuit.new(lawsuit_params)
-    @lawsuit.tenancy = current_user.tenancy if params[:lawsuit][:tenancy_id].blank?
+    @lawsuit.tenancy = current_user.profile.tenancy if params[:lawsuit][:tenancy_id].blank?
     @lawsuit.created_by = current_user
 
     respond_to do |format|

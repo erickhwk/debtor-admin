@@ -3,13 +3,21 @@ class ProfilesController < ApplicationController
   before_action :set_users, only: %i[ new edit create update ]
   before_action :set_profile, only: %i[ show edit update destroy ]
   before_action :not_authorized, only: %i[ new edit create update destroy ]
+  before_action :available_roles_for_assignment, only: %i[ new edit create update ]
 
   # GET /profiles or /profiles.json
   def index
-    if current_user.profile.role == 'developer'
+    case current_user.profile.role
+    when 'developer'
       @profiles = Profile.all
-    else
+    when 'admin'
       @profiles = Profile.where(tenancy_id: current_user.profile.tenancy_id)
+    when 'member'
+      if current_user.profile.tenancy_id.present?
+        @profiles = Profile.where(tenancy_id: current_user.profile.tenancy_id)
+      else
+        @profiles = [current_user.profile]
+      end
     end
   end
 
@@ -65,6 +73,20 @@ class ProfilesController < ApplicationController
   end
 
   private
+    def available_roles_for_assignment
+      @roles = []
+      Profile.roles.keys.each do |k|
+        if current_user.profile.role == 'developer'
+          @roles << k
+        else
+          if k != 'developer'
+            @roles << k
+          end
+        end
+      end
+      @roles
+    end
+
     def set_users
       if current_user.profile.role == 'developer'
         @users = User.all

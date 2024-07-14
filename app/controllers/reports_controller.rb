@@ -79,14 +79,14 @@ class ReportsController < ApplicationController
   private
     def check_if_theres_lawsuits
       unless current_user.profile.role == 'developer'
-        redirect_to new_lawsuit_path, alert: 'Não existem processos para associar a um informe. Por favor, crie seu primeiro processo.' if Lawsuit.where(tenancy: current_user.tenancy).empty?
+        redirect_to new_lawsuit_path, alert: 'Não existem processos para associar a um informe. Por favor, crie seu primeiro processo.' if Lawsuit.where(tenancy: current_user.profile.tenancy).empty?
       end
     end
 
     def set_lawsuits
       current_user.profile.role == 'developer' ?
         @lawsuits = Lawsuit.all :
-        @lawsuits = Lawsuit.where(tenancy: current_user.tenancy)
+        @lawsuits = Lawsuit.where(tenancy: current_user.profile.tenancy)
     end
     # Use callbacks to share common setup or constraints between actions.
     def set_report

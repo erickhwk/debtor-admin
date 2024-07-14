@@ -12,21 +12,9 @@
 
     <script src="https://unpkg.com/slim-select@latest/dist/slimselect.min.js"></script>
     <link href="https://unpkg.com/slim-select@latest/dist/slimselect.css" rel="stylesheet"></link>
-
-    <script>
-      if (
-        localStorage.getItem('color-theme') === 'dark' ||
-        (!('color-theme' in localStorage) &&
-          window.matchMedia('(prefers-color-scheme: dark)').matches)
-      ) {
-        document.documentElement.classList.add('dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-      }
-    </script>
   </head>
 
-  <body class="h-full dark:bg-gray-800 dark:text-gray-100">
+  <body class="h-full bg-gray-blue-lighter dark:bg-gray-800 dark:text-gray-100">
     <% if user_signed_in? %>
       <%= render "shared/sidebar" %>
       <main class="py-10 lg:pl-72">

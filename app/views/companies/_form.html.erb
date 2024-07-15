@@ -23,12 +23,12 @@
 
   <div class="my-5">
     <%= form.label :lawsuit_ids, "Processos" %>
-    <%= form.collection_select :lawsuit_ids, @lawsuits, :id, :alias, { include_blank: true, multiple: true }, { class: "-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5", id:"selectElement" } %>
+    <%= form.collection_select :lawsuit_ids, @lawsuits, :id, :alias, { include_blank: true, multiple: true }, { class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ", id:"selectElement" } %>
   </div>
 
 
   <div class="inline">
-    <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+    <%= form.submit class: "text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-3.5 me-2 mb-2 cursor-pointer" %>
   </div>
 <% end %>
 
